@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .font {
+            font-size: 30px;
+            font-weight: 700;
+            color: blueviolet;
+            margin-top: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="font">
+        <p>李白：{{message}}</p>
+        <p>工资：{{money}}</p>
+        <p>富豪：{{list}}</p>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                message: '天生我材必有用!',
+                money: 13000,
+                list: ["马云", "马化腾", "王健林"]
+            }
+        });
+
+        console.log(vm.message);
+        console.log(vm.money);
+        console.log(vm.list);
+
+
+        vm.message = '千金散去还复来'
+        vm.money = 15000
+        vm.list.push("李白")
+        // vm.list = vm.list.join('').split().push("李白")
+    </script>
+</body>
+
+</html>

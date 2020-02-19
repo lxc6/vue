@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .font {
+            font-size: 30px;
+            font-weight: 700;
+            color: blueviolet;
+            margin-top: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="font">
+        <p id="p1">{{fn1()}}</p>
+        <p id="p2"></p>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                alipay: '支付宝',
+                wechat: '微信'
+            },
+            methods: {
+                fn1() {
+                    this.fn2()
+                    console.log(this.alipay);
+                    return document.getElementById('p1').innerText = this.alipay
+
+                },
+                fn2() {
+                    document.getElementById('p2').innerText = this.wechat
+                    console.log(this.wechat);
+                }
+            }
+        });
+        vm.fn1()
+    </script>
+</body>
+
+</html>

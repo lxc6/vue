@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .font {
+            font-size: 30px;
+            font-weight: 700;
+            color: blueviolet;
+            margin-top: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="font">
+        {{msg}}
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                msg: 'hello world!!!'
+            }
+        });
+    </script>
+</body>
+
+</html>

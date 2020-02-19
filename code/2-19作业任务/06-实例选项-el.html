@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .font {
+            font-size: 30px;
+            font-weight: 700;
+            color: blueviolet;
+            margin-top: 100px;
+            text-align: center;
+        }
+
+        .red {
+            color: red;
+        }
+
+        .green {
+            color: greenyellow;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="font">
+        {{msg}}
+    </div>
+    <div class="box01 font red">{{msg}}</div>
+    <div class="box02 font green">{{msg}}</div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                msg: '紧跟老高小步跑'
+            }
+        });
+        var vm01 = new Vue({
+            el: '.box01',
+            data: {
+                msg: 'Vuejs真奇妙'
+            }
+        });
+        var vm02 = new Vue({
+            el: document.getElementsByClassName('box02')[0],
+            data: {
+                msg: '今天写个dom瞧一瞧'
+            }
+        });
+        // ---------------------------不可将html和body添加为实例选项el 视图管理
+
+        var vm03 = new Vue({
+            // el: 'html',
+            el: 'body',
+            data: {
+                msg: '今天写个dom瞧一瞧'
+            }
+        });
+    </script>
+</body>
+
+</html>

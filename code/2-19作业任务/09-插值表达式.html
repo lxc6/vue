@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .font {
+            font-size: 30px;
+            font-weight: 700;
+            color: blueviolet;
+            margin-top: 100px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box" class="font">
+        <p>{{msg='知道前端的水有多深吗'}}</p>
+        <p>{{showMessage}}</p>
+        <p>{{fn1()}}</p>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                msg: `我要成为前端程序员`,
+                showMessage: `false`,
+                arr: [1, 2, 3]
+            },
+            methods: {
+                fn1() {
+                    var arr1 = this.arr
+                    return arr1.reverse().join('')
+                }
+            }
+        });
+        vm.fn1()
+    </script>
+</body>
+
+</html>

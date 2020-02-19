@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bg {
+            width: 50%;
+            height: 40vh;
+            margin: 0 auto;
+            border-radius: 20vh;
+            text-align: center;
+            font-size: 30px;
+            font-weight: 700;
+            padding: 30px;
+            box-sizing: border-box;
+        }
+
+        .light {
+            background-color: orange;
+            margin-top: 20px;
+        }
+
+        .night {
+            background-color: darkcyan;
+            margin-top: 20px;
+        }
+
+        button {
+            width: 100px;
+            height: 40px;
+            margin: 20px 0 20px 50%;
+            transform: translateX(-50%);
+            border: none;
+            outline: none;
+            border-radius: 20px;
+            background-color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <span>{{fn1()}}</span>
+        <button onclick="light()">开关灯</button>
+        <!-- v-if -->
+        <div v-if="light" class="light bg">白天</div>
+        <div v-else="light" class="night bg">黑夜</div>
+        <!-- v-show -->
+        <div v-show="light" class="light bg">白天</div>
+        <div v-show="!light" class="night bg">黑夜</div>
+
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#box',
+            data: {
+                light: true
+            },
+            methods: {
+                fn1() {
+                    console.log(this.light);
+                }
+            }
+        });
+
+        light = () => {
+            vm.light = !vm.light
+        }
+    </script>
+</body>
+
+</html>
