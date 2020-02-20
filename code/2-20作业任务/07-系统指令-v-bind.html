@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>幻灯片轮播图</title>
+    <style>
+        #app {
+            position: relative;
+            width: 80%;
+            height: 80vh;
+            margin: 30px auto;
+            background-color: #ccc;
+        }
+
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            width: 600px;
+            height: 337px;
+            border: 10px solid #000;
+        }
+
+        .btn {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 20px;
+            margin: auto;
+            width: 600px;
+            height: 40px;
+            text-align: center;
+        }
+
+        .btn button {
+            width: 100px;
+            height: 40px;
+            background-color: orange;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <img :src="picList[currentIndex]" alt="">
+        <div class="btn">
+            <button @click="start">开始轮播</button>
+            <button @click="stop">关闭轮播</button>
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                picList: [
+                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582209935796&di=aa35d7899fd166992ee3f3909e0687a7&imgtype=0&src=http%3A%2F%2Fattachments.gfan.net.cn%2Fforum%2Fattachments2%2F201406%2F05%2F202239uy9ylqp4q4ua9cq2.jpg',
+                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582209936831&di=7910fc121821ffa9944caf8111c779ad&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F7Po3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2Fd1160924ab18972bf3568778e1cd7b899e510a17.jpg',
+                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582209945072&di=5069d1a6733501eeba332c3be1bef16f&imgtype=0&src=http%3A%2F%2Fwww.bbra.cn%2FUploadfiles%2Fimgs%2F2013%2F03%2F26%2Fmm3%2FXbzs_002.jpg',
+                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582209945066&di=5edbe4b72564e91f55cc94b15e3d5172&imgtype=0&src=http%3A%2F%2Fpic1.win4000.com%2Fwallpaper%2Ff%2F55f14fd71e4ae.jpg',
+                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582209945064&di=d1457c38d1df61d0a3ca2316b13f5f70&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F-Po3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F55e736d12f2eb93830538399d9628535e5dd6f9b.jpg',
+                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582209959367&di=d0b79bec9498fddee710bf6491166d70&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F9vo3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F80cb39dbb6fd52660121f66aa718972bd4073642.jpg'
+                ],
+                currentIndex: 0
+            },
+            methods: {
+                start() {
+                    if (this.flag) {
+                        return
+                    }
+                    let fn = () => {
+                        if (this.currentIndex < this.picList.length - 1) {
+                            this.currentIndex++
+                        } else {
+                            this.currentIndex = 0
+                        }
+                    }
+                    // 设置一个虚拟属性接收定时器
+                    this.flag = setInterval(fn, 800)
+                },
+                stop() {
+                    clearInterval(this.flag)
+                    this.flag = null
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

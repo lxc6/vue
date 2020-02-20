@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <input @input="change" type="text" :value="name">
+        <button @click="btn">点击获取</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: 'Vuejs竟干出如此的事！！'
+            },
+            methods: {
+                change(e) {
+                    console.log(e.target.value);
+
+                    this.name = e.target.value
+                },
+                btn() {
+                    console.log(this.name);
+
+                }
+
+            }
+        });
+    </script>
+</body>
+
+</html>

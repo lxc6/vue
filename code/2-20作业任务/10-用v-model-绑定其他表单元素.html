@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        select {
+            width: 100px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- input -->
+        <p>{{nameInput}}</p>
+        <input v-model="nameInput" type="text">
+        <!-- textarea -->
+        <p>{{nameTextarea}}</p>
+        <textarea v-model="nameTextarea" name="" id="" cols="30" rows="5"></textarea>
+        <!-- checkbox -->
+        <p>爱好：{{nameCheckbox}}</p>
+        <input v-model="nameCheckbox" type="checkbox" value="xx">学习
+        <input v-model="nameCheckbox" type="checkbox" value="lx">旅行
+        <input v-model="nameCheckbox" type="checkbox" value="yy">游泳
+        <!-- radio -->
+        <p>性别：{{nameRadio}}</p>
+        <input v-model="nameRadio" type="radio" value="man">男
+        <input v-model="nameRadio" type="radio" value="woman">女
+        <input v-model="nameRadio" type="radio" value="Shemale">妖
+        <!-- select -->
+        <p>城市：{{nameSelect}}</p>
+        <select v-model="nameSelect" name="" id="">
+            <option value=""></option>
+            <option value="Beijing">北京</option>
+            <option value="Shanghai">上海</option>
+            <option value="Guangzhou">广州</option>
+            <option value="Shenzhen">深圳</option>
+
+        </select>
+
+
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                nameInput: '窗含西岭千秋雪',
+                nameTextarea: '门泊东吴万里船',
+                nameCheckbox: [],
+                nameRadio: '',
+                nameSelect: "Beijing"
+
+            },
+            methods: {}
+        });
+    </script>
+</body>
+
+</html>
