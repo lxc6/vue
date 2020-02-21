@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>正常1：{{msg}}</p>
+        <p>全局1：{{msg|global}}</p>
+        <p>局部1：{{msg|local}}</p>
+        <input type="text" v-model="msg">
+    </div>
+
+    <div id="app2">
+        <p>正常2：{{msg}}</p>
+        <p>全局2：{{msg|global}}</p>
+        <p>局部2：{{msg|local}}</p>
+        <input type="text" v-model="msg">
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        // 全局
+        Vue.filter('global', function (value) {
+            return value.charAt(0).toUpperCase() + value.substr(1)
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'abcde'
+            },
+            methods: {},
+            filters: {
+                local(value) {
+                    return value.substr(0, 4) + value.charAt(4).toUpperCase()
+                }
+            }
+        });
+        var vm2 = new Vue({
+            el: '#app2',
+            data: {
+                msg: 'abcde'
+            },
+            methods: {},
+            filters: {
+                local(value) {
+                    // console.dir(value);
+                    return value.split('').reverse().join('')
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

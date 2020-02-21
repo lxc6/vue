@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        input {
+            width: 500px;
+            height: 30px;
+            text-indent: 2em;
+            /* text-align: center; */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <p :style="{color:color}">{{ date|formaDate}}</p>
+        <p :style="[fontSize,fontWeight]">{{ date|formaDate}}</p>
+        <input type="text" v-model="date">
+
+    </div>
+    <script src="../vue.js"></script>
+    <script src="../moment.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                date: new Date(),
+                color: 'red',
+                fontSize: {
+                    fontSize: '20px',
+                    color: 'skyblue'
+                },
+                fontWeight: {
+                    fontWeight: 'bold'
+                }
+            },
+            methods: {
+                // date() {
+                //     function da() {
+                //         return moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
+                //     }
+                //     var time = setInterval(da(), 1000)
+                //     return time
+                // }
+            },
+            filters: {
+                formaDate(value) {
+                    return moment(value).format("YYYY-MM-DD HH:mm:ss")
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

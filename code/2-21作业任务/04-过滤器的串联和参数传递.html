@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p>{{ msg | local1(5) }}</p>
+        <p :style="{color:color}">{{ msg | local1(5) | local2 }}</p>
+        <p :style="[fontSize,fontWeight]">{{ msg | local1(5) | local2 }}</p>
+        <input type="text" v-model="msg">
+
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: "freestyle",
+                color: 'red',
+                fontSize: {
+                    fontSize: '20px',
+                    color: 'skyblue'
+                },
+                fontWeight: {
+                    fontWeight: 'bold'
+                }
+            },
+            methods: {},
+            filters: {
+                local1(value, i) {
+                    return value.split('').map(function (item, index) {
+                        if (index === i) {
+                            return item.toUpperCase()
+                        }
+                        return item //其他字符不变
+                    }).join('')
+                },
+                local2(value) {
+                    return value.split('').reverse().join('')
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

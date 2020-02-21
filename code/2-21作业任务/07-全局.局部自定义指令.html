@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+        <p v-change="msg">{{msg}}</p>
+        <input type="text" v-model="msg">
+        <input type="text" v-focus="msg">
+        <img src="" alt="" v-add="00000">
+
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.directive('focus', {
+            inserted(dom) {
+                dom.focus()
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: '全局,局部自定义指令'
+            },
+            methods: {},
+            directives: {
+                change: {
+                    inserted(dom, option) {
+                        dom.innerText = option.value + '&&10086'
+                    },
+                    update(dom, option) {
+                        dom.innerText = option.value + '&&10000'
+                    }
+                },
+                add: {
+                    inserted(dom, option) {
+                        dom.src =
+                            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582302480657&di=9fb5a828caecfd2540cc675c7919047b&imgtype=0&src=http%3A%2F%2Fimg.pconline.com.cn%2Fimages%2Fupload%2Fupc%2Ftx%2Fphotoblog%2F1511%2F15%2Fc4%2F15264222_15264222_1447554104854.jpg'
+                        dom.style.border = '10px solid orange'
+                        dom.style.width = '524px'
+                        dom.style.height = '321px'
+                        dom.style.borderRadius = '50%'
+
+                    },
+                    update(dom, option) {
+                        dom.innerText = option.value + '&&10000'
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

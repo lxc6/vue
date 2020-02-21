@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        p {
+            font-size: 20px;
+            font-weight: bold;
+            color: skyblue;
+        }
+
+        p span {
+            color: orange;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <p>税前工资: <span>{{money}}</span></p>
+        <p>公积金: <span>{{gMoney}}</span></p>
+        <p>养老保险: <span>{{yMoney}}</span></p>
+        <p>医疗保险: <span>{{dMoney}}</span></p>
+        <p>个人所得税: <span>{{sMoney}}</span></p>
+        <p>税后工资: <span>{{rMoney}}</span></p>
+
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                money: 10000
+            },
+            methods: {},
+            computed: {
+                gMoney() {
+                    // 公积金系数
+                    return this.money * 0.12
+                },
+                yMoney() {
+                    // 养老保险扣钱系数
+                    return this.money * 0.08
+                },
+                dMoney() {
+                    // 医疗保险系数
+                    return this.money * 0.02
+                },
+                sMoney() {
+                    // 个人所得税   - 5000 * 2% 
+                    return (this.money - this.gMoney - this.yMoney - this.dMoney - 5000) * 0.02
+                },
+                rMoney() {
+                    // 税后
+                    return this.money - this.gMoney - this.yMoney - this.dMoney - this.sMoney
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
