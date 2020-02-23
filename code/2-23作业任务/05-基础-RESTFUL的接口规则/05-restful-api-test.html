@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 200px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            background-color: #eee;
+            overflow: auto;
+        }
+
+        li {
+            list-style: none;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 40px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            margin: 20px 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div v-cloak id="app">
+        <ul class="box">
+            <li v-for="item in list">
+                <span>姓名：{{item.name}}</span>
+                <a @click.prevent="del(item.id)" href="#">删除</a>
+            </li>
+        </ul>
+
+        <input v-model="name" type="text">
+        <button @click="add">点击添加数据</button>
+        <br>
+        <input v-model="search" type="text"> 搜索
+    </div>
+    <script src="../../vue.js"></script>
+    <script src="../../axios.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                name: '',
+                search: '',
+                list: [],
+                PATH: 'http://localhost:8080/test'
+            },
+            // 监听data中search的数据变化来实时发送请求
+            watch: {
+                search: function (newValue) {
+                    axios.get(`${this.PATH}/?name_like=${newValue}`).then(res => {
+                        this.list = res.data
+                    })
+                }
+            },
+            methods: {
+                get() {
+                    axios.get(this.PATH).then(res => {
+                        this.list = res.data
+                    })
+                },
+                add() {
+                    axios.post(this.PATH, {
+                        name: this.name
+                    }).then(res => {
+                        this.get()
+                        this.name = ''
+                    })
+                },
+                del(id) {
+                    if (confirm('你确定要删除吗')) {
+                        axios.delete(`${this.PATH}/${id}`).then(res => {
+                            this.get()
+                        })
+                    }
+                }
+
+            },
+            created() {
+                this.get()
+            }
+
+        });
+    </script>
+</body>
+
+</html>

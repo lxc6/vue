@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-color: #eee;
+        }
+
+        ul {
+            display: flex;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        li {
+            list-style: none;
+            margin: 20px;
+            width: 200px;
+            height: 280px;
+            background-color: #fff;
+
+        }
+
+        img {
+            width: 200px;
+        }
+
+        .bot {
+            display: flex;
+            margin-top: 20px;
+            height: 50px;
+            line-height: 50px;
+            justify-content: space-around;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .btn {
+            flex: 3;
+            height: 50px;
+            line-height: 45px;
+            font-size: 30px;
+            color: snow;
+            text-align: center;
+            cursor: pointer;
+            background-color: skyblue;
+
+        }
+
+        .center {
+            flex: 6;
+            text-align: center;
+            border: 1px solid skyblue;
+        }
+
+        .cut {
+            border-radius: 50% 0 0 50%;
+        }
+
+        .add {
+            border-radius: 0 50% 50% 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <goods v-for="item in 6"></goods>
+            <goods2 v-for="item in 6"></goods2>
+        </ul>
+    </div>
+
+
+
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component("goods", {
+            template: `
+            <li>
+                <div class="top">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582478603109&di=019cae0b2cb0884b5b3de1470d8ce977&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1625239233%2C3828809240%26fm%3D214%26gp%3D0.jpg">
+                </div>
+                <div class="bot">
+                    <span @click="cut" class="btn cut">-</span>
+                    <span class="center">{{count}}</span>
+                    <span @click="add" class="btn add">+</span>
+                </div>
+            </li>
+            `,
+            data() {
+                return {
+                    count: 0
+                }
+            },
+            methods: {
+                add() {
+                    this.count++
+                },
+                cut() {
+                    if (this.count > 0) {
+                        this.count--
+                    }
+                }
+            }
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            filters: {},
+            directives: {},
+            computed: {},
+            // 局部
+            components: {
+                goods2: {
+                    template: `
+            <li>
+                <div class="top">
+                <img src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582481160510&di=b7749b96737d512298030c0498451484&imgtype=0&src=http%3A%2F%2Fimage2.suning.cn%2Fuimg%2Fb2c%2Fnewcatentries%2F0070094634-000000000603825311_1_400x400.jpg">
+                </div>
+                <div class="bot">
+                    <span @click="cut" class="btn cut">-</span>
+                    <span class="center">{{count}}</span>
+                    <span @click="add" class="btn add">+</span>
+                </div>
+            </li>
+            `,
+                    data() {
+                        return {
+                            count: 0
+                        }
+                    },
+                    methods: {
+                        add() {
+                            this.count++
+                        },
+                        cut() {
+                            if (this.count > 0) {
+                                this.count--
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        });
+    </script>
+</body>
+
+</html>

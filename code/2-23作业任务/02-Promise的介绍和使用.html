@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        button {
+            width: 100px;
+            height: 40px;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 10px;
+            letter-spacing: 5px;
+            background-color: blueviolet;
+            color: snow;
+        }
+
+        img {
+            margin: 10px;
+            width: 200px;
+            height: 300px;
+            border: 10px solid #000;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div><button @click="promise">按 钮</button></div>
+        <img v-for="item in list" :src="item" alt="">
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            methods: {
+                promise() {
+                    new Promise(function (resolve, reject) {
+                        resolve(Math.random())
+                    }).then(function (res) {
+                        return new Promise(function (resolve, reject) {
+                            resolve(Math.ceil(res * 10))
+                        })
+                    }).then(res => {
+                        console.log(res);
+                        let imgSrc =
+                            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582470356792&di=72b90ce40ffaf72a830f26049a809fd6&imgtype=0&src=http%3A%2F%2Fn1.cmsfile.pg0.cn%2Fgroup1%2FM00%2F00%2FD5%2FCgoOEFpESJ6ATFaNAAhuejJgT4w859.jpg%3Fenable%3D%26qt%3D75'
+                        // Array.from(Array(n)，fn) 迭代方法 创建n个undefined组成的数组 后面函数返回值替换undefined
+                        this.list = Array.from(Array(res), () => imgSrc)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 300px;
+            height: 200px;
+            padding: 20px;
+            box-sizing: border-box;
+            background-color: #eee;
+        }
+
+        span {
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="box">
+            <span v-for="item in list">姓名：{{item.name}} <br></span>
+
+        </div>
+
+        <button @click="get">点击获取数据</button>
+    </div>
+    <script src="../../vue.js"></script>
+    <script src="../../axios.min.js"></script>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: []
+            },
+            methods: {
+                get() {
+                    axios.get('http://localhost:8080/test').then(res => {
+                        this.list = res.data
+                    })
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
