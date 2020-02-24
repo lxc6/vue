@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>点餐</title>
+    <style>
+        #app {
+            width: 60%;
+            margin: 30px auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+
+        }
+
+        .box {
+            width: 260px;
+            margin: 40px 20px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        .img {
+            width: 260px;
+            height: 150px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .bot {
+            width: 260px;
+            height: 45px;
+            line-height: 40px;
+            padding: 0 10px;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            font-size: 20px;
+            font-weight: bold;
+            /* 防止文字被选中 */
+            user-select: none;
+        }
+
+        .bot span {
+            display: inline-block;
+        }
+
+        .btn {
+            width: 40px;
+            height: 40px;
+            line-height: 36px;
+            font-size: 30px;
+            color: snow;
+            text-align: center;
+            background-color: #ff8000;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div v-cloak id="app">
+        <list v-for="item in list" :food="item" @out="screen" :key="item.id" />
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        Vue.component("list", {
+            props: ["food"], //一定要注意props的前后顺序
+            template: `
+                <div class="box">
+                    <img :src="food.img" class="img"/>
+                    <div class="bot">
+                        <span>{{food.title}}</span>
+                        <list-son @changes="changeNum" :num="food.count"/>
+                     </div>
+                </div>`,
+            methods: {
+                changeNum(num) {
+                    this.$emit("out", this.food.id, num)
+                }
+            },
+            components: {
+                "list-son": {
+                    template: `
+                        <div class="count">
+                            <span v-if="num" @click="cut" class="btn">-</span>
+                            <span v-if="num" class="num">{{num}}</span>
+                            <span @click="add" class="btn">+</span>
+                         </div> `,
+                    props: ["num"], //！！！！！ props要放在template下边 注意顺序
+                    methods: {
+                        add() {
+                            this.$emit("changes", this.num + 1)
+                        },
+                        cut() {
+                            this.$emit("changes", this.num - 1)
+                        }
+                    }
+                }
+            }
+
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                list: [{
+                        id: 1,
+                        img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582385941145&di=c4ebf24db1509ebe93adca0c137c1938&imgtype=0&src=http%3A%2F%2Fimg.improve-yourmemory.com%2Fpic%2F72071791ca96de6e8983c1310190e0fa-2.jpg',
+                        title: '龙虾拌芥末',
+                        count: 0
+                    },
+                    {
+                        id: 2,
+                        img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582385941144&di=83385bf0b2c64ccde9981467098b2d52&imgtype=0&src=http%3A%2F%2Fattachments.gfan.com%2Fforum%2F201503%2F18%2F210259bqy79b8e7zfykqzk.jpg',
+                        title: '杭州烧麦',
+                        count: 0
+                    },
+                    {
+                        id: 3,
+                        img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582385941144&di=f29fcba50a3784a7dc8fbe182825f3fb&imgtype=0&src=http%3A%2F%2Fhuafans.dbankcloud.com%2Fpic%2F2015%2F07%2F22%2F3c9982588d15d72a027ac18876113b31_10857385%2C5120%2C2880.jpg%3Fmode%3Ddownload',
+                        title: '培根煎蛋',
+                        count: 0
+                    },
+                    {
+                        id: 4,
+                        img: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582385941143&di=6e6d5074660ce895b2f3071b31b7eaa3&imgtype=0&src=http%3A%2F%2Fyouimg1.c-ctrip.com%2Ftarget%2Ftg%2F868%2F809%2F701%2F156784678eb24390a30d1500d0d49b79.jpg',
+                        title: '烤羊肉串',
+                        count: 0
+                    }
+                ]
+            },
+            methods: {
+                screen(id, num) {
+                    let curItem = this.list.find(item => item.id === id)
+                    curItem.count = num
+                    // let curItem = this.list.find(item => item.id === id)
+                    // curItem.count = num
+
+                }
+            },
+
+        });
+    </script>
+
+</body>
+
+</html>

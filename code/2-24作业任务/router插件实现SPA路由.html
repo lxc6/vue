@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>四大美人</title>
+    <style>
+        body {
+            background-color: #ccc;
+        }
+
+        .nav {
+            width: 800px;
+            text-align: center;
+            margin: 30px auto;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .nav a {
+            display: inline-block;
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: brown;
+            background-color: burlywood;
+            border: 5px ridge brown;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        .pic {
+            width: 800px;
+            height: 400px;
+            margin: 10px auto;
+            border: 15px groove brown;
+            border-radius: 215px;
+        }
+
+        .img {
+            width: 800px;
+            height: 400px;
+            border-radius: 200px;
+        }
+
+        .under {
+            position: absolute;
+            z-index: -1;
+        }
+    </style>
+</head>
+
+<body>
+    <div v-cloak id="app">
+        <div class='nav'>
+            <router-link to="xs">西施</router-link>
+            <router-link to="wzj">王昭君</router-link>
+            <router-link to="dc">貂蝉</router-link>
+            <router-link to="yyh">杨玉环</router-link>
+        </div>
+        <div class="pic">
+            <img class="img under"
+                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582559955723&di=fa157d8a9e24702b5fc4c29d640a6777&imgtype=0&src=http%3A%2F%2Fwx1.sinaimg.cn%2Flarge%2F007487hZly1g75vxpjgthj31pe0yidko.jpg" />
+            <router-view></router-view>
+        </div>
+
+    </div>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+
+    <script>
+        var xs = {
+            template: `<img class="img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582559955723&di=fa157d8a9e24702b5fc4c29d640a6777&imgtype=0&src=http%3A%2F%2Fwx1.sinaimg.cn%2Flarge%2F007487hZly1g75vxpjgthj31pe0yidko.jpg"/>`
+        }
+        var wzj = {
+            template: `<img class="img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582559487638&di=6c88849ef1aaa6535a3954ca069cd5c7&imgtype=0&src=http%3A%2F%2Fwww.kol2.com%2Fuploads%2Fallimg%2F180323%2F6-1P323131P02O.png"/>`
+        }
+        var dc = {
+            template: `<img class="img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582558365952&di=1dd416d97fff38b538369709675e3a78&imgtype=jpg&src=http%3A%2F%2Fp0.ssl.cdn.btime.com%2Ft017019e5d0393a83c6.jpg%3Fsize%3D1920x972"/>`
+        }
+        var yyh = {
+            template: `<img class="img" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582558397028&di=03c33eee092c9721690089d90d4c62e6&imgtype=0&src=http%3A%2F%2Fi0.hdslb.com%2Fbfs%2Farticle%2Fa8051b4121cb6c3b2b5f00d5c5fa89cd090f92dc.jpg"/>`
+        }
+        var router = new VueRouter({
+            routes: [{
+                path: '/xs',
+                component: xs
+            }, {
+                path: '/wzj',
+                component: wzj
+            }, {
+                path: '/dc',
+                component: dc
+            }, {
+                path: '/yyh',
+                component: yyh
+            }]
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                time: ''
+            },
+            methods: {},
+            router,
+            created() {}
+
+        });
+    </script>
+</body>
+
+</html>
