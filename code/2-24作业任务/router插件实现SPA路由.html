@@ -47,11 +47,6 @@
             height: 400px;
             border-radius: 200px;
         }
-
-        .under {
-            position: absolute;
-            z-index: -1;
-        }
     </style>
 </head>
 
@@ -64,8 +59,6 @@
             <router-link to="yyh">杨玉环</router-link>
         </div>
         <div class="pic">
-            <img class="img under"
-                src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582559955723&di=fa157d8a9e24702b5fc4c29d640a6777&imgtype=0&src=http%3A%2F%2Fwx1.sinaimg.cn%2Flarge%2F007487hZly1g75vxpjgthj31pe0yidko.jpg" />
             <router-view></router-view>
         </div>
 
@@ -88,18 +81,23 @@
         }
         var router = new VueRouter({
             routes: [{
-                path: '/xs',
-                component: xs
-            }, {
-                path: '/wzj',
-                component: wzj
-            }, {
-                path: '/dc',
-                component: dc
-            }, {
-                path: '/yyh',
-                component: yyh
-            }]
+                    path: '/',
+                    redirect: '/xs' //路由重定向
+                },
+                {
+                    path: '/xs',
+                    component: xs
+                }, {
+                    path: '/wzj',
+                    component: wzj
+                }, {
+                    path: '/dc',
+                    component: dc
+                }, {
+                    path: '/yyh',
+                    component: yyh
+                }
+            ]
         })
         var vm = new Vue({
             el: '#app',
