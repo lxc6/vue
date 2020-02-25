@@ -69,7 +69,7 @@
     <script src="../vue.js"></script>
     <script>
         Vue.component("list", {
-            props: ["food"], //一定要注意props的前后顺序
+            props: ["food"],
             template: `
                 <div class="box">
                     <img :src="food.img" class="img"/>
@@ -85,13 +85,13 @@
             },
             components: {
                 "list-son": {
+                    props: ["num"],
                     template: `
                         <div class="count">
                             <span v-if="num" @click="cut" class="btn">-</span>
                             <span v-if="num" class="num">{{num}}</span>
                             <span @click="add" class="btn">+</span>
                          </div> `,
-                    props: ["num"], //！！！！！ props要放在template下边 注意顺序
                     methods: {
                         add() {
                             this.$emit("changes", this.num + 1)
@@ -137,9 +137,6 @@
                 screen(id, num) {
                     let curItem = this.list.find(item => item.id === id)
                     curItem.count = num
-                    // let curItem = this.list.find(item => item.id === id)
-                    // curItem.count = num
-
                 }
             },
 
