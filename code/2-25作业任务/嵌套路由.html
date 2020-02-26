@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #app {
+            width: 60%;
+            margin: 20px auto;
+        }
+
+        .main-nav {
+            height: 40px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        h2 {
+            color: rebeccapurple;
+        }
+
+        .main-nav a,
+        .nav a {
+            display: inline-block;
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: brown;
+            background-color: burlywood;
+            border: 5px ridge brown;
+            border-radius: 30px;
+            text-decoration: none;
+        }
+
+        .main-nav .router-link-active {
+            background-color: goldenrod;
+            color: indianred;
+        }
+
+        .nav a {
+            width: 100px;
+            height: 30px;
+            margin: 5px 0;
+            line-height: 30px;
+            font-size: 15px;
+            color: cornsilk;
+            background-color: indianred;
+            border: 2px ridge brown;
+            border-radius: 10px;
+        }
+
+        .main-view,
+        .view {
+            padding: 10px 30px;
+            box-sizing: border-box;
+            margin: 10px auto;
+            border-radius: 25px;
+            background-color: #eee;
+        }
+
+        h3 {
+            color: orange;
+        }
+
+        .img {
+            width: 70%;
+            margin: 10px auto;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        p {
+            font-size: 40px;
+            font-weight: bold;
+            color: indianred;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 导航 -->
+        <div class="main-nav">
+            <router-link to='/main'>主食</router-link>
+            <router-link to='/snack'>小吃</router-link>
+            <router-link to='/drink'>饮料</router-link>
+        </div>
+        <!-- 容器 -->
+        <div class="main-view">
+            <router-view></router-view>
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+    <script>
+        var main = {
+            template: `<div>
+                            <h2>我国的一些特色食物:</h2>
+                                <div class="nav">
+                                   <router-link to='/main/food?index=0&name=北京烤鸭'>北京烤鸭</router-link>
+                                   <router-link to='/main/food?index=1&name=小肉刀削面'>小肉刀削面</router-link>
+                                   <router-link to='/main/food?index=2&name=驴肉火烧'>驴肉火烧</router-link>
+                                   <router-link to='/main/food?index=3&name=鸭血粉丝'>鸭血粉丝</router-link>
+                                   <router-link to='/main/food?index=4&name=煎饼果子'>煎饼果子</router-link>   
+                               </div>  
+                            <div class="view">
+                               <router-view></router-view>
+                            </div>     
+                        </div>`
+        }
+        var snack = {
+            template: `<div>
+                        <p>东坡肉</p>
+                        <p>虾饺</p>
+                        <p>一口蟹</p>
+                     </div>`
+        }
+        var drink = {
+            template: `<div>
+                        <p>可乐</p>
+                        <p>雪碧</p>
+                        <p>美年达</p>
+                    </div>`
+        }
+        var router = new VueRouter({
+            routes: [{
+                path: '/',
+                redirect: '/main'
+            }, {
+                path: '/main',
+                component: main,
+                children: [{
+                    path: 'food',
+                    component: {
+                        template: `<div>
+                            <h3>当前的美食为：---{{$route.query.name}}--- </h3>
+                            <div class="img">
+                                <img  :src="getScr" />
+                            </div>
+                        </div>`,
+                        data() {
+                            return {
+                                list: [
+                                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582739529303&di=4ec0b2256c9bf694ec26419db9853408&imgtype=0&src=http%3A%2F%2Fattachment2.jmw.com.cn%2Fimage%2F2018%2F11%2F01%2F9df55efca61a49decf4664980f552895.jpg',
+                                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582739697958&di=4337fdf1cef0de70a351f4360ccc019b&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D2429891138%2C2462835527%26fm%3D214%26gp%3D0.jpg',
+                                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582739769457&di=8aead997c66e963c04665122e856f4bc&imgtype=0&src=http%3A%2F%2Fimg.mp.itc.cn%2Fupload%2F20170812%2F864f8b522b934ea9a7e82ef77acbc990_th.jpg',
+                                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582739972800&di=410db4dd99c489c3fd60d771161a0659&imgtype=0&src=http%3A%2F%2Fp0.meituan.net%2Fdeal%2Fc328c3beae784f19c8b9b0ecf0baf102150115.jpg',
+                                    'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582739871056&di=135f4f20b57ebeb9992adc16996e21e9&imgtype=0&src=http%3A%2F%2Fp0.meituan.net%2Fdeal%2F448d4d18b556110b7effbf4a7264244a134081.jpg'
+                                ]
+                            }
+                        },
+                        computed: {
+                            getScr() {
+                                // 通过router-link ?传参 在通过$route.query获取参数
+                                return this.list[this.$route.query.index]
+
+                            }
+                        }
+
+                    }
+                }]
+            }, {
+                path: '/snack',
+                component: snack
+            }, {
+                path: '/drink',
+                component: drink
+            }]
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router
+        });
+    </script>
+</body>
+
+</html>

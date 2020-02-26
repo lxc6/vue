@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .nav {
+            width: 800px;
+            height: 40px;
+            margin: 20px auto;
+            text-align: left;
+        }
+
+        .nav a {
+            display: inline-block;
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: brown;
+            background-color: burlywood;
+            border: 5px ridge brown;
+            border-radius: 30px;
+            text-decoration: none;
+
+        }
+
+        h3 {
+            width: 200px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 10px;
+            text-align: center;
+            background-color: darkkhaki;
+            color: darkmagenta
+        }
+
+        .pass {
+            padding-left: 20px;
+        }
+
+        .li {
+            list-style: none;
+        }
+
+        .li a {
+            display: inline-block;
+            width: 100px;
+            height: 30px;
+            margin: 5px 0;
+            line-height: 30px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            color: wheat;
+            text-align: center;
+            background-color: indianred;
+            border: 2px ridge brown;
+            border-radius: 10px;
+            text-decoration: none;
+        }
+
+        .view {
+            width: 800px;
+            padding: 30px;
+            box-sizing: border-box;
+            margin: 10px auto;
+            border: 5px solid #aaa;
+            border-radius: 25px;
+            background-color: #eee;
+        }
+
+        .text {
+            color: orange;
+            height: 40px;
+            line-height: 40px;
+        }
+
+        .img {
+            width: 600px;
+            height: 400px;
+            border: 10px ridge goldenrod;
+            margin: 10px auto;
+            border-radius: 30px;
+        }
+
+        img {
+            width: 600px;
+            height: 400px;
+            border-radius: 20px;
+        }
+
+        /* 选中自动生成的类 */
+        .router-link-active {
+            background-color: goldenrod !important;
+            color: indianred !important;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="app">
+        <div class="nav">
+            <router-link to="/bkList">百科列表</router-link>
+        </div>
+        <div class="view">
+            <router-view></router-view>
+        </div>
+
+    </div>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+    <script>
+        var bkList = {
+            template: `
+                <div class="content ">
+                    <h3>动态传参</h3>
+                    <div class="dynamic pass">
+                        <li v-for="item in list"  class="li">
+                            <router-link :to="'/bkInfo/'+item.name+'/'+item.id">{{item.name}}</router-link>
+                        </li>
+                    </div>
+                    <h3>query传参</h3>
+                    <div class="query pass" >
+                        <li v-for="item in list" class="li">
+                            <router-link :to="'/bkInfo?name='+item.name+'&id='+item.id">{{item.name}}</router-link>
+                        </li>
+                    </div>                  
+                </div>
+            `,
+            data() {
+                return {
+                    list: [{
+                        id: 1,
+                        name: '韩红'
+                    }, {
+                        id: 2,
+                        name: '古天乐'
+                    }, {
+                        id: 3,
+                        name: '胡歌'
+                    }, {
+                        id: 4,
+                        name: '韩雪'
+                    }]
+                }
+            }
+
+        }
+        var bkInfo = {
+            template: `
+                <div>
+                    <div class="text">
+                        当前的明星为: <strong>{{$route.params.name}} {{$route.query.name}}</strong>
+                    </div>                  
+                    <div class="img">
+                        <img :src="getSrc"/>
+                    </div>
+                    
+                </div>
+            `,
+            data() {
+                return {
+                    id: this.$route.params.id,
+                    id2: this.$route.query.id,
+                    list: [{
+                            id: 1,
+                            srcStr: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582718447992&di=398b44a3cc96eb1bac49545cecd92b72&imgtype=0&src=http%3A%2F%2Fbjyzxf.com%2Fupload%2Fneirong%2Fimage%2F20161112092919631963.jpg'
+                        },
+                        {
+                            id: 2,
+                            srcStr: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582718521412&di=d539b93e2d5820d513b5b5da0c3e65bf&imgtype=0&src=http%3A%2F%2Fwww.ltsj.cc%2Fd%2Ffile%2F20170728%2Fbc28bcc7e930984082c5762fefb6fada.jpg'
+                        },
+                        {
+                            id: 3,
+                            srcStr: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582728412987&di=2863f085bdda5efa8b99fbf9e0cafefe&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201605%2F11%2F20160511195909_YGyJ8.jpeg'
+                        },
+                        {
+                            id: 4,
+                            srcStr: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582718664810&di=9d8479ae997190728a56c6448146b265&imgtype=0&src=http%3A%2F%2Fdingyue.ws.126.net%2F2019%2F03%2F07%2F9f7efa807b7a4f569ca09c0962c3022b.jpeg'
+                        }
+                    ]
+                }
+            },
+            computed: {
+                getSrc() {
+
+                    if (this.id) {
+                        return this.list.find(item => item.id == this.id).srcStr
+                    } else {
+                        return this.list.find(item => item.id == this.id2).srcStr
+                    }
+
+                }
+            }
+        }
+        var router = new VueRouter({
+            routes: [{
+                path: '/bkList',
+                component: bkList
+            }, {
+                path: '/bkInfo/:name?/:id?',
+                component: bkInfo
+            }]
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router
+        });
+    </script>
+</body>
+
+</html>

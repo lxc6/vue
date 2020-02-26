@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        p {
+            font-size: 30px;
+            font-weight: bold;
+            color: goldenrod;
+        }
+
+        button {
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            color: snow;
+            background-color: skyblue;
+            cursor: pointer;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 容器 -->
+        <router-view></router-view>
+
+    </div>
+    <script src="../vue.js"></script>
+    <script src="../vue-router.js"></script>
+    <script>
+        var bj = {
+            template: `<div>
+                    <p>这里是北京，欢迎光临</p>
+                    <button @click="goSH">点击去上海</button>
+            </div>`,
+            methods: {
+                goSH() {
+                    this.$router.push('/sh');
+
+                }
+            }
+        }
+        var sh = {
+            template: `<div>
+                    <p>这里是上海，欢迎光临</p>
+                    <button @click="goSZ">点击去深圳</button>
+                    <button @click="goGZ">点击去广州</button>
+            </div>`,
+            methods: {
+                goSZ() {
+                    this.$router.replace('/sz')
+                },
+                goGZ() {
+                    this.$router.push('/gz')
+                }
+
+            }
+        }
+        var sz = {
+            template: `<div>
+                    <p>这里是深圳，欢迎光临</p>
+                    <button @click="goGZ">点击去广州</button>
+            </div>`,
+            methods: {
+                goGZ() {
+                    this.$router.push('/gz')
+                }
+            }
+        }
+        var gz = {
+            template: `<div>
+                    <p>这里是广州，欢迎光临</p>
+                    <button @click="goBJ">点击去北京</button>
+            </div>`,
+            methods: {
+                goBJ() {
+                    this.$router.go(-2)
+                }
+            }
+        }
+        var router = new VueRouter({
+            routes: [{
+                path: '/',
+                redirect: '/bj'
+            }, {
+                path: '/bj',
+                component: bj
+            }, {
+                path: '/sh',
+                component: sh
+            }, {
+                path: '/sz',
+                component: sz
+            }, {
+                path: '/gz',
+                component: gz
+            }]
+        })
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router
+        });
+    </script>
+</body>
+
+</html>
